@@ -1,0 +1,15 @@
+{{define "navbar"}}
+<nav id="navbar" class="navbar navbar-expand py-0 navbar-light bg-white border-bottom">
+    <div class="container-fluid">
+        <div id="forumTitle" class="navbar-brand ms-2 py-0 fs-1">FORUM</div>
+        <div>
+            <div class="navbar-nav">
+                <span id="navbarUsername" class="navbar-text me-3 text-body"></span>
+                <button class="nav-link me-2 bg-transparent border-0"
+                    data-bs-toggle="modal" data-bs-target="#createPostModal" >Create post</button>
+                <button id="logout" class="nav-link me-2 bg-transparent border-0">Log out</button>
+            </div>
+        </div>
+    </div>
+</nav>
+{{end}}

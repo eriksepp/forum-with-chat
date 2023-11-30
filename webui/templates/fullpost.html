@@ -1,0 +1,41 @@
+{{define "fullpost"}}
+<div id="fullPostContainer" class="col-lg-9 pt-4 ps-0">
+    <div class="card mb-3 border-0 pb-3">
+        <div class="card-header d-flex bg-transparent border-0 ps-0 pb-0 justify-content-between">
+            <div class="backBtn"></div>
+            <div class="left-section d-flex align-items-center">
+                <span id="fullPostTitle" class="fw-bolder fs-5 text-decoration-none me-2">
+                    Test title</span>
+            </div>
+            <div class="right-section d-flex flex-nowrap align-items-center">
+                <span id="fullPostUsername" class="username me-3">testAccount</span>
+                <i class="fa-regular fa-comment fa-xl me-1"></i>
+                <span id="fullPostCommentAmount" class="comment-count">5</span>
+            </div>
+        </div>
+        <!-- Categories -->
+        <div class="ps-0 pe-0">
+            <div id="fullPostCategoriesWrapper" class="d-flex flex-wrap align-items-start"></div>
+        </div>
+        <!-- Text -->
+        <div class="card-body text-decoration-none ps-0 pt-1">
+            <p id="fullPostContent" class="post-text mb-0">
+                Test text test text test texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest texttest text
+            </p>
+        </div>
+    </div>
+    <!-- Comments -->
+    <form id="createCommentForm" method="post">
+        <div class="form-floating mb-3">
+            <textarea id="newCommentText" class="form-control" placeholder=" "></textarea>
+            <label id="newCommentTextLabel" class="text-secondary" for="newCommentTextLabel">Add new comment...</label>
+        </div>
+        <div id="commentFormButtons" class="d-none form-group text-center mb-4">
+            <input type="button" id="cancelCreateComment" class="btn btn-secondary" value="Cancel"/>
+            <input type="submit" id="submitCreateCommentForm" class="btn btn-primary" value="Create Comment"/>
+        </div>
+        <input id="newCommentPostId" value="" hidden/>
+    </form>
+    <div id="fullPostCommentsContainer"></div>
+</div>
+{{end}}

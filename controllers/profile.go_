@@ -1,0 +1,122 @@
+package controllers
+
+import (
+	"net/http"
+	"strings"
+
+	"forum/application"
+	"forum/model"
+	"forum/route/middleware/acl"
+	"forum/shared/logger"
+	"forum/view"
+)
+
+type UserLikedPostsResponse struct {
+	UserLikedPosts []*model.PostWithReactionsAndCommentQty `json:"userLikedPosts"` // Likes or dislikes, corresponding on request
+}
+
+func ProfileGET(app *application.Application) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var err error
+		var posts []*model.Post
+		var postsWithReactionsAndCommentQty []*model.PostWithReactionsAndCommentQty
+		var user *model.User
+
+		view := view.New("profile.html")
+
+		if strings.HasSuffix(r.URL.Path, "/liked") {
+			ProfileGetLikedPosts(w, r, view)
+			return
+		}
+
+		if r.Context().Value(acl.UserKey) == nil {
+			logger.Error(err)
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+			return
+		}
+		user = r.Context().Value(acl.UserKey).(*model.User)
+
+		view.Vars["User"] = user
+		view.Authenticated = true
+
+		// get user's created posts from the database, throw an http.error if there is error and its not ErrNotFound (no posts)
+		if posts, err = model.GetPostsByUserId(user.Id); err != nil && err != model.ErrNotFound {
+			logger.Error(err)
+			http.Error(w, "Not Found 404", http.StatusNotFound)
+		}
+		// get reactions and amount of comment for posts
+		if postsWithReactionsAndCommentQty, err = model.GetPostsWithReactionsAndCommentQty(posts, user.Id); err != nil && err != model.ErrNotFound {
+			logger.Error(err)
+			http.Error(w, "Not Found 404", http.StatusNotFound)
+		}
+
+		// shorten the longer posts so only preview would be seen on main page
+		for _, post := range postsWithReactionsAndCommentQty {
+			if len(post.Post.Text) < 450 {
+				continue
+			}
+			for i := 440; i < len(post.Text); i++ { // find first space after 440 char
+				if string(post.Text[i]) == " " {
+					post.Text = post.Text[0:i] + "..."
+					break
+				}
+			}
+		}
+
+		// set the data to the view
+		view.Vars["Posts"] = postsWithReactionsAndCommentQty
+
+		if err := view.Execute(w); err != nil {
+			logger.Error(err)
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+		}
+	}
+}
+
+func ProfileGetLikedPosts(w http.ResponseWriter, r *http.Request, view *view.View) {
+	var err error
+	var posts []*model.Post
+	var postsWithReactionsAndCommentQty []*model.PostWithReactionsAndCommentQty
+	var user *model.User
+
+	if user = r.Context().Value(acl.UserKey).(*model.User); user == nil {
+		logger.Error(err)
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+		return
+	}
+
+	view.Vars["User"] = user
+	view.Authenticated = true
+
+	// get user liked posts from the database, throw an http.error if there is error and its not ErrNotFound (no posts)
+	if posts, err = model.GetUserLikedPosts(user.Id); err != nil && err != model.ErrNotFound {
+		logger.Error(err)
+		http.Error(w, "Not Found 404", http.StatusNotFound)
+	}
+	// get reactions and amount of comment for posts
+	if postsWithReactionsAndCommentQty, err = model.GetPostsWithReactionsAndCommentQty(posts, user.Id); err != nil && err != model.ErrNotFound {
+		logger.Error(err)
+		http.Error(w, "Not Found 404", http.StatusNotFound)
+	}
+
+	// shorten the longer posts so only preview would be seen on main page
+	for _, post := range postsWithReactionsAndCommentQty {
+		if len(post.Text) < 450 {
+			continue
+		}
+		for i := 440; i < len(post.Text); i++ { // find first space after 440 char
+			if string(post.Text[i]) == " " {
+				post.Text = post.Text[0:i] + "..."
+				break
+			}
+		}
+	}
+
+	// set the data to the view
+	view.Vars["Posts"] = postsWithReactionsAndCommentQty
+
+	if err := view.Execute(w); err != nil {
+		logger.Error(err)
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+	}
+}

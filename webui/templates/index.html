@@ -1,0 +1,14 @@
+{{template "base" .}}
+{{define "title"}}FORUM{{end}}
+{{define "main"}}
+<div id="mainContainer" class="container ps-2 ms-6 pe-0">
+    <div class="row ps-0 pe-0">
+        {{template "postslist" .}}
+        {{template "fullpost" .}}
+        {{template "chat" .}}
+        <div class="d-flex flex-column ps-4 pe-0" style="width: auto;">
+            {{template "onlineusers" .}}
+        </div>
+    </div>
+</div>
+{{end}}

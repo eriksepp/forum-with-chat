@@ -1,0 +1,17 @@
+{{define "chat"}}
+    <div id="chat-container" class="col-lg-9 pt-4 ps-0">
+        <div class="backBtn"></div>
+        <h3 id="chatTitle" class="fw-bold fs-4">Chat with test1</h3>
+        <div id="chatMessagesContainer">
+            <div id="chatUserOfflineOverlay">
+                <span id="chatUserOfflineText">User has gone offline<br>You can continue messaging when they are back</span>
+            </div>
+            <div id="noMessagesText">Your conversation starts here!</div>
+            <div id="chatMessages"></div>
+        </div>
+        <form id="chatMessageForm">
+            <input type="text" id="chatMessageInput" class="form-control form-control-lg fs-6" placeholder="Type message"></input>
+            <button type="submit" id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+{{end}}

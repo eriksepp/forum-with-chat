@@ -1,0 +1,62 @@
+{{define "register"}}
+<div id="registerContainer" class="flex-column align-items-center">
+	<div id="registerTitle" class="p-0">FORUM</div>
+	<div class="fs-4 m-0 p-0">Create a new account</div>
+	<form id="registerForm" class="d-flex flex-column align-items-center justify-content-center mt-1 mb-3">
+		<p id="registerErrorMessage" class="text-center text-danger" hidden>Error</p>
+		<div class="form-group mb-2">
+			<label for="username fs-4">Choose username</label>
+			<input type="text" id="registerUsername" name="username" class="form-control" autofocus/>
+		</div>
+		<div class="form-group mb-2">
+			<label for="firstName fs-4">First name</label>
+			<input type="text" id="registerFirstName" name="firstName" class="form-control"/>
+		</div>
+		<div class="form-group mb-2">
+			<label for="lastName fs-4">Last name</label>
+			<input type="text" id="registerLastName" name="lastName" class="form-control"/>
+		</div>
+		<div class="form-group mb-2">
+			<label for="registerBirthDay">Your birthday</label>
+			<div id="birthDateSelect" class="d-flex">
+				<select class="form-select" id="registerBirthDay" style="width: 28%;">
+					<option value="" disabled selected>Day</option>
+				</select>
+				<select class="form-select" id="registerBirthMonth" style="width: 43%;">
+					<option value="" disabled selected>Month</option>
+				</select>
+				<select class="form-select" id="registerBirthYear" style="width: 29%;">
+					<option value="" disabled selected>Year</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group mb-2">
+			<label for="registerGender">Your gender</label>
+			<select class="form-select" id="registerGender">
+				<option value="" disabled selected></option>
+				<option value="female">Female</option>
+				<option value="male">Male</option>
+				<option value="non-binary">Non-binary</option>
+			</select>
+		</div>
+		<div class="form-group mb-2">
+			<label for="email fs-4">E-mail</label>
+			<input type="email" id="registerEmail" name="email" class="form-control"/>
+		</div>
+		<div class="form-group mb-2">
+			<label for="password fs-4">
+				Password
+				<span class="text-secondary"> (8 characters or more)</span>
+			</label>
+			<div id="passwordInputWrapper">
+				<input type="password" id="registerPassword" name="password" class="form-control"/>
+				<div id="togglePassword" class="p-0"><i class="fa-regular fa-eye"></i></div>
+			</div>
+		</div>
+		<div class="form-group text-center mt-3 mb-0">
+			<input type="submit" id="submitRegisterForm" class="btn btn-primary" value="Sign up"/>
+		</div>
+	</form>
+	<div id="goBackToLoginButton" class="textLink">Already a user? Log in</div>
+</div>
+{{end}}
