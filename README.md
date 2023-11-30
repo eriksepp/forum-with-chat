@@ -12,7 +12,7 @@ Olena Budarahina (obudarah)
 # Technologies used
 
 Frontend:
-- Javascript (RequestAnimationFrame for animation)
+- HTML, CSS, JS
 - Bootstrap 5.2
 
 Backend:
