@@ -1,15 +1,43 @@
-# Real-time-forum
+# Real time Forum
 
 ## Description
+
 Real-time web forum that allows users to register, create posts, comment on posts, and send private chat messages to one another using Gorilla websocket
 
-## Audit questions
-[Link to audit questions](https://01.kood.tech/git/root/public/src/branch/master/subjects/real-time-forum/audit)
+## Authors
+
+Erik Hans Sepp (eriksepp)  
+Olena Budarahina (obudarah)
+
+# Technologies used
+
+Frontend:
+- Javascript (RequestAnimationFrame for animation)
+- Bootstrap 5.2
+
+Backend:
+- Go
+- SQLite
+- Gorilla websocket
 
 ## Running
 
-`go run .` from command line to run on port 8080  
+This project uses the Gorilla WebSocket package for handling WebSocket connections.
+Ensure you have this package installed before attempting to run the server.
+For installation run the following command in your terminal:
+
+`go get github.com/gorilla/websocket`
+
+If you have the Gorilla Websocket installed run the Go server with:
+
+`go run .` from command line to run on port 8080
+
 For other port use `go run . --p=PORT_NR` or `go run . --port=PORT_NR`
+
+## Screenshots
+<img src="screenshots/forum1.png" width="800" /><br>
+<img src="screenshots/forum2.png" width="800" /><br>
+<img src="screenshots/forum3.png" width="800" /><br>
 
 ## Dummy users for testing (With chat messages)
 
@@ -24,7 +52,3 @@ For other port use `go run . --p=PORT_NR` or `go run . --port=PORT_NR`
 
 Between traveler1994 and Hiker_Gal there are 36 chat messages  
 Between traveler1994 and GreenGuru there are 10 chat messages
-
-## Authors
-[obudarah / Olena Budarahina](https://01.kood.tech/git/obudarah)  
-[ehspp / Erik Hans Sepp](https://01.kood.tech/git/ehspp)
