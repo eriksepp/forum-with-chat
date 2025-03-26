@@ -9,7 +9,7 @@ Real-time web forum that allows users to register, create posts, comment on post
 Erik Hans Sepp (eriksepp)  
 Olena Budarahina (obudarah)
 
-# Technologies used
+## Technologies used
 
 Frontend:
 - HTML, CSS, JS
