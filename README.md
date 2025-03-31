@@ -1,4 +1,4 @@
-# Real time Forum
+# Forum with chat
 
 ## Description
 
